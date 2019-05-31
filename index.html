@@ -28,17 +28,33 @@
             renderer.setSize(window.innerWidth,window.innerHeight);
             document.body.appendChild(renderer.domElement);
             
-            var loader = new THREE.TextureLoader();
-            var material = new THREE.MeshLambertMaterial({
-                map:loader.load('Img/adizya.jpeg')
+            var loader = [];
+            var material = [];
+            var geometry = [];
+            //-----adizya added--------------
+
+            loader[0] = new THREE.TextureLoader();
+            material[0] = new THREE.MeshLambertMaterial({
+                map:loader[0].load('Img/adizya.jpeg')
             });
             
-            var geometry = new THREE.PlaneGeometry(1.9,2.66);
-            var mesh = new THREE.Mesh(geometry,material);
-            mesh.position.set(10.5,-5.5,0);
-            mesh.rotation.y = -0.5;
-            scene.add(mesh)
+            geometry[0] = new THREE.PlaneGeometry(3,5);
             
+            var adizya = new THREE.Mesh(geometry[0],material[0]);
+            adizya.position.set(9.5,-4.5,0);
+            adizya.rotation.y = -0.5;
+            scene.add(adizya)
+            
+            //-----Wheels added---------------
+            material[1] = new THREE.MeshLambertMaterial({
+                map:loader[0].load('Img/wheels.jpg')
+            });
+            geometry[1] = new THREE.PlaneGeometry(6,4);
+            var wheels = new THREE.Mesh(geometry[1],material[1]);
+            wheels.position.set(3,-3.2,0);
+            wheels.rotation.y = -0.5;
+            scene.add(wheels);
+
             var light = new THREE.PointLight(0Xffffff,1,0);
             light.position.set(1,1,200);
             scene.add(light);
@@ -46,12 +62,12 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                mesh.position.x -= 0.05;
-                mesh.position.y += p;
-                if(Math.floor(mesh.position.x) == 0) {
-                    p = -0.05;
-                    mesh.rotation.y = 0.5;
-                }
+                // adizya.position.x -= 0.05;
+                // adizya.position.y += p;
+                // if(Math.floor(adizya.position.x) == 0) {
+                //     p = -0.05;
+                //     adizya.rotation.y = 0.5;
+                // }
                 renderer.render(scene,camera);
             }
             animate();
