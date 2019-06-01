@@ -31,17 +31,17 @@
             var loader = [];
             var material = [];
             var geometry = [];
-            //-----adizya added--------------
 
+            //-----adizya added--------------
             loader[0] = new THREE.TextureLoader();
             material[0] = new THREE.MeshLambertMaterial({
                 map:loader[0].load('Img/adizya.jpeg')
             });
             
-            geometry[0] = new THREE.PlaneGeometry(3,5);
+            geometry[0] = new THREE.PlaneGeometry(2,4.5);
             
             var adizya = new THREE.Mesh(geometry[0],material[0]);
-            adizya.position.set(9.5,-4.5,0);
+            adizya.position.set(9.5,0,0);
             adizya.rotation.y = -0.5;
             scene.add(adizya)
             
@@ -49,11 +49,12 @@
             material[1] = new THREE.MeshLambertMaterial({
                 map:loader[0].load('Img/wheels.jpg')
             });
-            geometry[1] = new THREE.PlaneGeometry(6,4);
+            geometry[1] = new THREE.PlaneGeometry(5,3);
             var wheels = new THREE.Mesh(geometry[1],material[1]);
-            wheels.position.set(3,-3.2,0);
-            wheels.rotation.y = -0.5;
-            scene.add(wheels);
+            wheels.position.set(2.5,-3.35,-0.5);
+            wheels.rotation.y = -0.3;
+            // scene.add(wheels);
+
 
             var light = new THREE.PointLight(0Xffffff,1,0);
             light.position.set(1,1,200);
@@ -62,12 +63,11 @@
 
             function animate() {
                 requestAnimationFrame(animate);
-                // adizya.position.x -= 0.05;
-                // adizya.position.y += p;
-                // if(Math.floor(adizya.position.x) == 0) {
-                //     p = -0.05;
-                //     adizya.rotation.y = 0.5;
-                // }
+                adizya.position.x -= 0.008;
+                // adizya.position.z -= 0.005;
+                // wheels.position.x -= 0.005;
+                // wheels.position.z -= 0.005;
+                adizya.rotation.y += 0.0004;
                 renderer.render(scene,camera);
             }
             animate();
