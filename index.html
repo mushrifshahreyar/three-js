@@ -21,7 +21,7 @@
             var scene = new THREE.Scene();
             
             var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
+            camera.position.z = 3;
             
             var renderer = new THREE.WebGLRenderer();
             renderer.setClearColor("#e5e5e5");
@@ -36,13 +36,31 @@
                                     });
             
             var geometry = new THREE.BoxGeometry(1, 1, 1);
-            var material = new THREE.MeshLambertMaterial({ color: 0xf08080 });
+            
+            var cube1_material = [
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/adizya.jpeg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/Blitz.jpg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/clueless.jpeg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/tuxofwar.jpeg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/wheels.jpg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/wheels_car.jpg'),side : THREE.DoubleSide}),
+            ];
+            var material = new THREE.MeshFaceMaterial(cube1_material);
             var cube1 = new THREE.Mesh(geometry, material);
             cube1.position.set(3, 2, 0);                                    //x to y ratio remains the same for all cubes
             scene.add(cube1);
 
             var geometry = new THREE.BoxGeometry(1, 1, 1);
-            var material = new THREE.MeshLambertMaterial({ color: 0x20B2AA });
+            var cube2_material = [
+            new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/wheels_car.jpg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/Blitz.jpg'),side : THREE.DoubleSide}),
+                
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/adizya.jpeg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/clueless.jpeg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/wheels.jpg'),side : THREE.DoubleSide}),
+                new THREE.MeshBasicMaterial({ map : new THREE.TextureLoader().load('Img/tuxofwar.jpeg'),side : THREE.DoubleSide})
+            ];
+            var material = new THREE.MeshFaceMaterial(cube2_material);
             var cube2 = new THREE.Mesh(geometry, material);
             cube2.position.set(6, 4, 0);                                    //at the start, the second cube is further away than the first
             scene.add(cube2);
@@ -70,9 +88,9 @@
             var shapeMotion = function(cube) {
                 cube.rotation.x += 0.01;
                 cube.rotation.y += 0.01;
-                cube.position.x -= 0.08;
-                cube.position.y -= 0.05;
-                cube.position.z -= 0.04;
+                cube.position.x -= 0.02;
+                cube.position.y -= 0.01;
+                cube.position.z -= 0.01;
                 if(cube.position.y < -22)
                 {
                     cube.position.set(6, 4, 0);         //change this location according to how many cubes you have
