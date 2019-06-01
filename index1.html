@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>
+            Three,js Crash
+        </title>
+        
+        <style>
+            body {margin:0px;}
+            canvas { width:100%;
+                     height: 100%;}    
+        </style>
+    </head>
+    <body>
+        <script src="JS/three.js"></script>
+        <script src = "JS/MTLLoader.js"></script>
+        <script src = "JS/OBJLoader.js"></script>
+        <script>
+            var scene = new THREE.Scene();
+            
+            var light = new THREE.DirectionalLight('#ffffff',0.9);
+            light.position.set(-2,0,10);
+            scene.add(light);
+
+            var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 10;
+            
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth,window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+            
+            var loader = [];
+            var material = [];
+            var geometry = [];
+
+            //-----adizya added--------------
+            loader[0] = new THREE.TextureLoader();
+            material[0] = new THREE.MeshLambertMaterial({
+                map:loader[0].load('Img/adizya.jpeg')
+            });
+            
+            geometry[0] = new THREE.PlaneGeometry(2,4.5);
+            
+            var adizya = new THREE.Mesh(geometry[0],material[0]);
+            adizya.position.set(9.5,0,0);
+            adizya.rotation.y = -0.5;
+            scene.add(adizya)
+            
+            //-----Wheels added---------------
+            material[1] = new THREE.MeshLambertMaterial({
+                map:loader[0].load('Img/wheels.jpg')
+            });
+            geometry[1] = new THREE.PlaneGeometry(5,3);
+            var wheels = new THREE.Mesh(geometry[1],material[1]);
+            wheels.position.set(2.5,-3.35,-0.5);
+            wheels.rotation.y = -0.3;
+            // scene.add(wheels);
+
+
+            var light = new THREE.PointLight(0Xffffff,1,0);
+            light.position.set(1,1,200);
+            scene.add(light);
+            let p = 0.05;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                adizya.position.x -= 0.008;
+                // adizya.position.z -= 0.005;
+                // wheels.position.x -= 0.005;
+                // wheels.position.z -= 0.005;
+                adizya.rotation.y += 0.0004;
+                renderer.render(scene,camera);
+            }
+            animate();
+        </script>
+    </body>
+</html>
