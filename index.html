@@ -86,11 +86,25 @@
                 scene.add(object);
             });
             });
-            
+            //-----------background-----------
+            // var backText = THREE.ImageUtils.loadTexture('Img/galaxy_back.jpg');
+            // var backMesh = new THREE.Mesh(
+            //     new THREE.PlaneGeometry(2,2,0),
+            //     new THREE.MeshBasicMaterial({
+            //         map: backText
+            //     })
+            // );
+            // backMesh.material.depthTest = false;
+            // backMesh.material.depthWrite = false;
+            // var backScene = new THREE.Scene();
+            // var backCamera = new THREE.Camera();
+            // backScene.add(backCamera);
+            // backScene.add(backMesh);
             function animate() {
                 // mesh.rotation.y += 0.01;
                 requestAnimationFrame(animate);
-                // controls.update();
+                controls.update();
+                // renderer.render(backScene,backCamera);
                 renderer.render(scene,camera);
             }
             animate();
