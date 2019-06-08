@@ -46,7 +46,9 @@
             var renderer = new THREE.WebGLRenderer();
             renderer.setSize(window.innerWidth,window.innerHeight);
             document.body.appendChild(renderer.domElement);
-
+            var loader = new THREE.TextureLoader();
+            text = loader.load('Img/galaxy_back.jpg');
+            scene.background = text;
             // var geometry = new THREE.BoxGeometry(1,1,1);
             // var material = new THREE.MeshBasicMaterial({color : 0x00ff00});
             camera.position.z = 185;
@@ -86,25 +88,11 @@
                 scene.add(object);
             });
             });
-            //-----------background-----------
-            // var backText = THREE.ImageUtils.loadTexture('Img/galaxy_back.jpg');
-            // var backMesh = new THREE.Mesh(
-            //     new THREE.PlaneGeometry(2,2,0),
-            //     new THREE.MeshBasicMaterial({
-            //         map: backText
-            //     })
-            // );
-            // backMesh.material.depthTest = false;
-            // backMesh.material.depthWrite = false;
-            // var backScene = new THREE.Scene();
-            // var backCamera = new THREE.Camera();
-            // backScene.add(backCamera);
-            // backScene.add(backMesh);
             function animate() {
                 // mesh.rotation.y += 0.01;
                 requestAnimationFrame(animate);
                 controls.update();
-                // renderer.render(backScene,backCamera);
+            
                 renderer.render(scene,camera);
             }
             animate();
