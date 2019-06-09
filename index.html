@@ -43,14 +43,18 @@
             // }
             var scene = new THREE.Scene();
             var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight, 0.1, 1000);
-            var renderer = new THREE.WebGLRenderer();
+            var renderer = new THREE.WebGLRenderer({
+                antialias : true,
+                alpha: true
+
+            });
             renderer.setSize(window.innerWidth,window.innerHeight);
             document.body.appendChild(renderer.domElement);
             var loader = new THREE.TextureLoader();
-            text = loader.load('Img/galaxy_back.jpg');
-            scene.background = text;
-            // var geometry = new THREE.BoxGeometry(1,1,1);
-            // var material = new THREE.MeshBasicMaterial({color : 0x00ff00});
+            backTexture = loader.load('Img/galaxy.jpg');
+            backTexture.minFilter = THREE.LinearFilter;
+            scene.background = backTexture;
+            
             camera.position.z = 185;
             var controls = new  THREE.OrbitControls(camera,renderer.domElement);
             controls.enableDamping = true;
@@ -66,10 +70,10 @@
             var backLight = new THREE.DirectionalLight(0xffffff,1.0);
             backLight.position.set(100,0,-100);
             
-            var toplight = new THREE.DirectionalLight(0xffffff,1.0);
-            toplight.position.set(0,-10,50);
+            var toplight = new THREE.AmbientLight(0xffffff);
+            // toplight.position.set(0,-10,50);
             
-            scene.add(toplight);
+            // scene.add(toplight);
             scene.add(keylight);
             scene.add(fillLight);
             scene.add(backLight);
