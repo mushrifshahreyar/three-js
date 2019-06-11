@@ -17,32 +17,8 @@
         <script src="OBJLoader.js"></script>
         <script src = "OrbitControls.js"></script>
         <script>
-            // var scene = new THREE.Scene();
-            
-            // var light = new THREE.DirectionalLight(0xffffff,0.5);
-            // light.position.set(0,0,-30);
-            // scene.add(light);
-            // var light2 = new THREE.PointLight(0xffffff,0.5);
-            // light2.position.set(0,0,-30);
-            // scene.add(light2);
-
-            // var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight, 0.1, 1000);
-            // camera.position.z = -1000;
-            
-            // var renderer = new THREE.WebGLRenderer();
-            // renderer.setSize(window.innerWidth,window.innerHeight);
-            // document.body.appendChild(renderer.domElement);
-            
-            // var loader = new THREE.GLTFLoader();
-            // loader.load('robot_subdivision.glb',handle_load);
-            // var mesh;
-            // function handle_load(gltf) {
-            //     mesh = gltf.scene.children[0];
-            //     scene.add(mesh);
-            //     mesh.position.z = 110;
-            // }
             var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight, 0.1, 1000);
+            var camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight, 1, 10000);
             var renderer = new THREE.WebGLRenderer({
                 antialias : true,
                 alpha: true
@@ -71,7 +47,7 @@
             backLight.position.set(100,0,-100);
             
             var toplight = new THREE.AmbientLight(0xffffff);
-            // toplight.position.set(0,-10,50);
+            toplight.position.set(0,-10,50);
             
             // scene.add(toplight);
             scene.add(keylight);
