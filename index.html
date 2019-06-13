@@ -16,9 +16,12 @@
         <script src="MTLLoader.js"></script>
         <script src="OBJLoader.js"></script>
         <script src = "OrbitControls.js"></script>
+        <script src = "GLTFLoader.js"></script>
+        <script src = "DRACOLoader.js"></script>
         <script>
             var scene = new THREE.Scene();
-            var camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight, 1, 10000);
+            var camera = new THREE.PerspectiveCamera(35,window.innerWidth / window.innerHeight, 0.1, 1000);
+
             var renderer = new THREE.WebGLRenderer({
                 antialias : true,
                 alpha: true
@@ -31,48 +34,78 @@
             backTexture.minFilter = THREE.LinearFilter;
             scene.background = backTexture;
             
-            camera.position.z = 185;
+            camera.position.set(31,-0.4,14.74);
             var controls = new  THREE.OrbitControls(camera,renderer.domElement);
             controls.enableDamping = true;
             controls.campingFactor = 0.25;
             controls.enableZoom = true;
             
-            var keylight = new THREE.DirectionalLight(new THREE.Color('hsl(30,100%,75%)'),1.0);
-            keylight.position.set(-100,100,100);
+             var keylight = new THREE.DirectionalLight(new THREE.Color('hsl(30,100%,75%)'),1.0);
+             keylight.position.set(-100,100,100);
             
-            var fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240,100%,75%)'),0.75);
-            fillLight.position.set(100,100,500);
+             var fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240,100%,75%)'),0.75);
+             fillLight.position.set(100,100,500);
             
-            var backLight = new THREE.DirectionalLight(0xffffff,1.0);
-            backLight.position.set(100,0,-100);
+            // var backLight = new THREE.DirectionalLight(0xffffff,1.0);
+            // backLight.position.set(100,0,-100);
             
-            var toplight = new THREE.AmbientLight(0xffffff);
+            var toplight = new THREE.AmbientLight(0xffffff, 0.1);
             toplight.position.set(0,-10,50);
             
-            // scene.add(toplight);
-            scene.add(keylight);
-            scene.add(fillLight);
-            scene.add(backLight);
+            scene.add(toplight);
+             scene.add(keylight);
+             scene.add(fillLight);
+            // scene.add(backLight);
+            
             var mtlLoader = new THREE.MTLLoader();
             mtlLoader.load('complete.mtl',function(materials) {
                 materials.preload();
                 var objLoader = new THREE.OBJLoader();
             // objLoader.setPath('')
-            objLoader.setMaterials(materials);
+            //objLoader.setMaterials(materials);
             objLoader.load('complete.obj',function(object) {
                 // object.position.y = 90;
-                object.position.set(0,-10,50);
+                object.position.set(10,-10,50);
                 object.rotation.y = -0.95;
                 // object.rotation.x =0;
-                object.scale.set(2,3.5,3.5);
+                // object.scale.set(2,3.5,3.5);
                 scene.add(object);
             });
             });
+
+            // var loader = new THREE.GLTFLoader();
+            // loader.setDRACOLoader(new THREE.DRACOLoader());
+            // THREE.DRACOLoader.getDecoderModule();
+            // loader.load("completed.glb", function(gltf) {
+            //     scene.add(gltf.scene);
+            //     gltf.scene;
+            //     gltf.scenes;
+            //     gltf.asset;
+            //     gltf.lights;
+            // });
+
+            var scale = 0.1;
+            var mouseX = 0;
+            var mouseY = 0;
+
+            camera.rotation.order = "YXZ"; // this is not the default
+
+            document.addEventListener( "mousemove", mouseMove, false );
+            function mouseMove( event ) {
+                // console.log('helapsdkasdas');
+                mouseX = - ( event.clientX / renderer.domElement.clientWidth ) * 2 + 1;
+                mouseY = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+                console.log(camera.rotation.x + " " + camera.rotation.y);
+                // console.log(camera.rotation.x);
+                // camera.rotation.x = mouseY / scale;
+                // camera.rotation.y = mouseX / scale;
+
+            }
             function animate() {
                 // mesh.rotation.y += 0.01;
                 requestAnimationFrame(animate);
                 controls.update();
-            
+                // object.rotation.y += 0.01;
                 renderer.render(scene,camera);
             }
             animate();
