@@ -62,7 +62,7 @@
                 materials.preload();
                 var objLoader = new THREE.OBJLoader();
             // objLoader.setPath('')
-            //objLoader.setMaterials(materials);
+            objLoader.setMaterials(materials);
             objLoader.load('complete.obj',function(object) {
                 // object.position.y = 90;
                 object.position.set(10,-10,50);
